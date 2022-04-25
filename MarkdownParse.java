@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Currency;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
+
 public class MarkdownParse {
 
     public static ArrayList<String> getLinks(String markdown) {
@@ -20,6 +22,9 @@ public class MarkdownParse {
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
+            if (closeParen  == -1 || openBracket == -1) {
+                break;
+            }
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
         }
